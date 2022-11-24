@@ -1,5 +1,6 @@
 import { useState } from "react";
-import prods from "./products";
+import ShoppingList from "./components/shopping-list/shopping-list.component";
+import ShoppingCart from "./components/shopping-cart/shopping-cart.component";
 import "./App.css";
 const App = () => {
   const [cart, setCart] = useState([]);
@@ -10,6 +11,7 @@ const App = () => {
    */
   const onChange = (event) => {
     setCart((prevState) => [...prevState, event.target.textContent]);
+    console.log(event.target);
   };
 
   /**
@@ -24,33 +26,10 @@ const App = () => {
     );
   };
 
-  const cartList = cart.map((item, index) => {
-    return (
-      <div key={index} id={index} onClick={onDelete}>
-        {item}
-      </div>
-    );
-  });
-  const productList = prods.map((prod, index) => {
-    return index % 2 === 0 ? (
-      <div
-        key={index}
-        className="prod-item"
-        style={{ color: "red" }}
-        onClick={onChange}
-      >
-        {prod.name} {prod.price}
-      </div>
-    ) : (
-      <div key={index} className="prod-item" onClick={onChange}>
-        {prod.name} {prod.price}
-      </div>
-    );
-  });
   return (
     <div className="display">
-      <div className="left"> {productList}</div>
-      <div className="right"> {cartList}</div>
+      <ShoppingList onClick={onChange} />
+      <ShoppingCart onClick={onDelete} cart={cart} />
     </div>
   );
 };
