@@ -1,6 +1,4 @@
-import prods from "../../products";
-
-const ShoppingList = ({ onClick }) => {
+const ShoppingList = ({ onClick, prods }) => {
   const productList = prods.map((prod, index) => {
     return index % 2 === 0 ? (
       <div
